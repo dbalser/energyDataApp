@@ -2,9 +2,57 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div>
+<div id="Index">
 
-    <p>Hello World and be free</p>
-    <partial name="DisplayedData.cshtml" />
+    <form method="post">
 
+        <div id="FilterContainor">
+
+            <select>
+                <option value="">Select a Column</option>
+
+                <option value="avgprice">Avg Price</option>
+                <option value="maxprice">Max Price</option>
+                <option value="minprice">Min Price</option>
+                <option value="avgcongestion">Avg Congestion</option>
+                <option value="maxcongestion">Max Congestion</option>
+                <option value="mincongestion">Min Congestion</option>
+            </select>
+
+            <input type="number" placeholder="min" />
+
+            <input type="number" placeholder="max" />
+
+        </div>
+
+        <div id="SortContainor">
+
+            <select >
+                <option value="">Select a Column</option>
+
+                <option value="node">Node</option>
+                <option value="iso">ISO</option>
+                <option value="nodetype">Node Type</option>
+                <option value="pricetype">Price Type</option>
+                <option value="state">State</option>
+                <option value="county">County</option>
+                <option value="avgprice">Avg Price</option>
+                <option value="maxprice">Max Price</option>
+                <option value="minprice">Min Price</option>
+                <option value="avgcongestion">Avg Congestion</option>
+                <option value="maxcongestion">Max Congestion</option>
+                <option value="mincongestion">Min Congestion</option>
+            </select>
+
+            <select>
+                <option value="">Select Sorting Pattern</option>
+
+                <option value="abc">ABC / 123</option>
+                <option value="cba">CBA / 321</option>
+            </select>
+
+        </div>
+
+        <input type="submit" value="Update List" />
+    </form>
 </div>
