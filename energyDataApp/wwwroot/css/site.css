@@ -1,12 +1,47 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
+
+/*#9FBFBE #50A4A7 #177275 #E9EEF2 #0F122C
+greyblue, lightblue, blue, white, black*/
+
 body {
     margin: 0 auto;
     padding: 0;
-    background:red;
+    background: #E9EEF2;
 }
 
 #Index {
-    width: 100%;
-    background:blue;
+}
+
+#FilterContainor, #SortContainor {
+    width: 35%;
+    background: #50A4A7;
+    border-radius: 25px;
+    display: inline-block;
+    margin: 5% 7%;
+}
+
+#FilterContainor *, #SortContainor * {
+    display: block;
+    margin: 3% 35%;
+    background: #E9EEF2;
+    border:none;
+}
+
+#FilterContainor select {
+    margin-left: 36%;
+}
+
+#SortContainor select:first-child {
+    margin-left: 38%;
+}
+
+input[type=submit] {
+    background: #50A4A7;
+    width: 15%;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 25px;
+    margin-left: 42.5%;
+    margin-bottom: 5%;
 }
