@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using energyDataApp.Models;
+using System.Diagnostics.Contracts;
 
 namespace energyDataApp.Controllers
 {
@@ -14,6 +15,14 @@ namespace energyDataApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Create(string FilterCol, int MinNum, int MaxNum, string SortCol, string SortMethod)
+        {
+            return View("Index");
+        }
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
