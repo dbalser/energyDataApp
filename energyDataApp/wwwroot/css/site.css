@@ -4,10 +4,11 @@ for details on configuring this project to bundle and minify static web assets. 
 /*#9FBFBE #50A4A7 #177275 #E9EEF2 #0F122C
 greyblue, lightblue, blue, white, black*/
 
-body {
+* {
     margin: 0 auto;
     padding: 0;
     background: #E9EEF2;
+    list-style: none
 }
 
 #Index {
@@ -44,4 +45,41 @@ input[type=submit] {
     border-radius: 25px;
     margin-left: 42.5%;
     margin-bottom: 5%;
+}
+
+#EnergyReadings p{
+    font-size: 18px;
+}
+#EnergyReadings div {
+    display: inline-block;
+    background: #177275;
+    width: 46%;
+    margin-left: 3%;
+}
+#EnergyReadings li {
+    width: 95%;
+    background: #177275;
+    border-radius: 10px;
+}
+
+
+#BasicInfo #row1, #BasicInfo #row2, #NumericalInfo #row1, #NumericalInfo #row2 {
+    width: 42%;
+    display: inline-block;
+    margin-left: 5%;
+    background: #177275;
+}
+
+
+#BasicInfo p:nth-child(odd), #NumericalInfo p:nth-child(odd) {
+    margin: 2.5% 0%;
+    background: #177275;
+    color: #E9EEF2;
+}
+
+#BasicInfo p:nth-child(even), #NumericalInfo p:nth-child(even) {
+    padding: 2.5% 10%;
+    margin-bottom: 5%;
+    background: #E9EEF2;
+    border-radius: 25px;
 }
