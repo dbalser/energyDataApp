@@ -1,4 +1,7 @@
-﻿@model  energyDataApp.Models.SearchParms
+﻿@model energyDataApp.Models.SearchParms
+@using System.IO;
+@using CsvHelper;
+@using energyDataApp.Models;
 
 <div id="Index">
 
@@ -6,7 +9,7 @@
 
         <div id="FilterContainor">
 
-            <select asp-for="FilterCol" >
+            <select asp-for="FilterCol">
                 <option value="">Select a Column</option>
 
                 <option value="avgprice">Avg Price</option>
@@ -57,51 +60,63 @@
 
             <ul>
 
-                <li>
+                @{
+                    TextReader reader = new StreamReader("DataTable.csv");
+                    var csv = new CsvReader(reader);
+                    csv.Read();
+                    csv.ReadHeader();
 
-                    <div id="BasicInfo">
+                    while (csv.Read())
+                    {
+                        var record = csv.GetRecord<EnergyData>();
 
-                        <div id="row1">
-                            <p>Node</p>
-                            <p>0096WD_7_N001</p>
-                            <p>State</p>
-                            <p>UT</p>
-                            <p>ISO</p>
-                            <p>CAISO</p>
-                        </div>
+                        <li>
 
-                        <div id="row2">
-                            <p>Node Type</p>
-                            <p>NODE</p>
-                            <p>County</p>
-                            <p>Salt Lake</p>
-                            <p>Pricing Type</p>
-                            <p>Real Time</p>
-                        </div>
-                    </div>
+                            <div id="BasicInfo">
 
-                    <div id="NumericalInfo">
+                                <div id="row1">
+                                    <p>Node</p>
+                                    <p>@record.NODE</p>
+                                    <p>State</p>
+                                    <p>@record.State</p>
+                                    <p>ISO</p>
+                                    <p>@record.ISO</p>
+                                </div>
 
-                        <div id="row1">
-                            <p>Avg Price</p>
-                            <p>35.575122</p>
-                            <p>Max Pric</p>
-                            <p>21530.15522</p>
-                            <p>Min Price</p>
-                            <p>-31.223837</p>
-                        </div>
+                                <div id="row2">
+                                    <p>Node Type</p>
+                                    <p>@record.NodeType</p>
+                                    <p>County</p>
+                                    <p>@record.County</p>
+                                    <p>Pricing Type</p>
+                                    <p>@record.PricingType</p>
+                                </div>
+                            </div>
 
-                        <div id="row2">
-                            <p>Avg Congestion</p>
-                            <p>-1.648036</p>
-                            <p>Max congestion</p>
-                            <p>311.54138</p>
-                            <p>Min Congestion</p>
-                            <p>-295.783445</p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                            <div id="NumericalInfo">
+
+                                <div id="row1">
+                                    <p>Avg Price</p>
+                                    <p>@record.AvgPrice</p>
+                                    <p>Max Pric</p>
+                                    <p>@record.MaxPrice</p>
+                                    <p>Min Price</p>
+                                    <p>@record.MinPrice</p>
+                                </div>
+
+                                <div id="row2">
+                                    <p>Avg Congestion</p>
+                                    <p>@record.AvgCongestion</p>
+                                    <p>Max congestion</p>
+                                    <p>@record.MaxCongestion</p>
+                                    <p>Min Congestion</p>
+                                    <p>@record.MinCongestion</p>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+           </ul>
         </div>
-     </form>
+    </form>
 </div>

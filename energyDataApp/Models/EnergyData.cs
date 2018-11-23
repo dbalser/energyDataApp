@@ -16,21 +16,21 @@ namespace energyDataApp.Models
         public string MaxCongestion { get; set; }
         public string MinCongestion { get; set; }
 
-        public EnergyData (string NODE, string ISO, string NodeType, string PricingType, string State, string County, string AvgPrice, string MaxPrice, string MinPrice, string AvgCongestion, string MaxCongestion, string MinCongestion) 
-        {
-            this.NODE = NODE;
-            this.ISO = ISO;
-            this.NodeType = NodeType;
-            this.PricingType = PricingType;
-            this.State = State;
-            this.County = County;
-            this.AvgPrice = AvgPrice;
-            this.MaxPrice = MaxPrice;
-            this.MinPrice = MinPrice;
-            this.AvgCongestion = AvgCongestion;
-            this.MaxCongestion = MaxCongestion;
-            this.MinCongestion = MinCongestion;
+        //public EnergyData (string NODE, string ISO, string NodeType, string PricingType, string State, string County, string AvgPrice, string MaxPrice, string MinPrice, string AvgCongestion, string MaxCongestion, string MinCongestion) 
+        //{
+        //    this.NODE = NODE;
+        //    this.ISO = ISO;
+        //    this.NodeType = NodeType;
+        //    this.PricingType = PricingType;
+        //    this.State = State;
+        //    this.County = County;
+        //    this.AvgPrice = AvgPrice;
+        //    this.MaxPrice = MaxPrice;
+        //    this.MinPrice = MinPrice;
+        //    this.AvgCongestion = AvgCongestion;
+        //    this.MaxCongestion = MaxCongestion;
+        //    this.MinCongestion = MinCongestion;
 
-        }
+        //}
     }
 }

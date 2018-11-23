@@ -8,6 +8,7 @@ using energyDataApp.Models;
 using System.Diagnostics.Contracts;
 using System.IO;
 using CsvHelper;
+using System.Collections;
 
 namespace energyDataApp.Controllers
 {
@@ -15,9 +16,16 @@ namespace energyDataApp.Controllers
     {
         public IActionResult Index()
         {
-            TextReader reader = new StreamReader("DataTable.csv");
-            var csvReader = new CsvReader(reader);
-            var records = csvReader.GetRecords<EnergyData>();
+            //TextReader reader = new StreamReader("DataTable.csv");
+            //var csv = new CsvReader(reader);
+            //csv.Read();
+            //csv.ReadHeader();
+
+            //while (csv.Read())
+            //{
+            //    var record = csv.GetRecord<EnergyData>();
+            //}
+
 
             return View();
         }
