@@ -16,7 +16,7 @@ namespace energyDataApp.Controllers
             return View();
         }
 
-        public IActionResult Create(string FilterCol, int MinNum, int MaxNum, string SortCol, string SortMethod)
+        public IActionResult Create(SearchParms NewParms)
         {
             return View("Index");
         }

@@ -1,11 +1,12 @@
-﻿
+﻿@model  energyDataApp.Models.SearchParms
+
 <div id="Index">
 
     <form method="post" asp-controller="Home" asp-action="Create">
 
         <div id="FilterContainor">
 
-            <select name="FilterCol">
+            <select asp-for="FilterCol" >
                 <option value="">Select a Column</option>
 
                 <option value="avgprice">Avg Price</option>
@@ -16,15 +17,15 @@
                 <option value="mincongestion">Min Congestion</option>
             </select>
 
-            <input name="MaxNum" type="number" placeholder="max" />
+            <input asp-for="MaxNum" type="number" placeholder="max" />
 
-            <input name="MinNum" type="number" placeholder="min" />
+            <input asp-for="MinNum" type="number" placeholder="min" />
 
         </div>
 
         <div id="SortContainor">
 
-            <select name="SortCol">
+            <select asp-for="SortCol">
                 <option value="">Select a Column</option>
 
                 <option value="node">Node</option>
@@ -41,7 +42,7 @@
                 <option value="mincongestion">Min Congestion</option>
             </select>
 
-            <select name="SortMethod">
+            <select asp-for="SortMethod">
                 <option value="">Select Sorting Pattern</option>
 
                 <option value="abc">ABC / 123</option>
