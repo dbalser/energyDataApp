@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using energyDataApp.Models;
 using System.Diagnostics.Contracts;
+using System.IO;
+using CsvHelper;
 
 namespace energyDataApp.Controllers
 {
@@ -13,6 +15,10 @@ namespace energyDataApp.Controllers
     {
         public IActionResult Index()
         {
+            TextReader reader = new StreamReader("DataTable.csv");
+            var csvReader = new CsvReader(reader);
+            var records = csvReader.GetRecords<EnergyData>();
+
             return View();
         }
 
