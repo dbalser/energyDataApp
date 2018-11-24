@@ -15,7 +15,7 @@ namespace energyDataApp.Controllers
     public class HomeController : Controller
     {
 
-        public object SearchParms = new SearchParms();
+        public SearchParms CurrentSearchParms = new SearchParms();
 
         public IActionResult Index()
         {
@@ -27,15 +27,22 @@ namespace energyDataApp.Controllers
             while (csv.Read())
             {
                 var record = csv.GetRecord<EnergyData>();
-                this.SearchParms
+                CurrentSearchParms.AllEnergyData.Add(record);
 
             }
 
-
-            return View();
+            //var data = CurrentSearchParms.AllEnergyData[0];
+            //Console.WriteLine("----");
+            //Console.WriteLine("----");
+            //Console.WriteLine("----");
+            //Console.WriteLine(data + " Data Baby");
+            //Console.WriteLine("----");
+            //Console.WriteLine("----");
+            //Console.WriteLine("----");
+            return View(CurrentSearchParms);
         }
 
-        public IActionResult Create(SearchParms NewParms)
+        public IActionResult Create()
         {
             return View("Index");
         }
