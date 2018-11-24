@@ -31,20 +31,12 @@ namespace energyDataApp.Controllers
 
             }
 
-            //var data = CurrentSearchParms.AllEnergyData[0];
-            //Console.WriteLine("----");
-            //Console.WriteLine("----");
-            //Console.WriteLine("----");
-            //Console.WriteLine(data + " Data Baby");
-            //Console.WriteLine("----");
-            //Console.WriteLine("----");
-            //Console.WriteLine("----");
             return View(CurrentSearchParms);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(string FilterCol, string MaxNum, string MinNum, string SortCol, string SortMethod)
         {
-            return View("Index");
+            return View("Index", CurrentSearchParms);
         }
 
 
