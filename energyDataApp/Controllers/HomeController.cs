@@ -14,17 +14,22 @@ namespace energyDataApp.Controllers
 {
     public class HomeController : Controller
     {
+
+        public object SearchParms = new SearchParms();
+
         public IActionResult Index()
         {
-            //TextReader reader = new StreamReader("DataTable.csv");
-            //var csv = new CsvReader(reader);
-            //csv.Read();
-            //csv.ReadHeader();
+            TextReader reader = new StreamReader("DataTable.csv");
+            var csv = new CsvReader(reader);
+            csv.Read();
+            csv.ReadHeader();
 
-            //while (csv.Read())
-            //{
-            //    var record = csv.GetRecord<EnergyData>();
-            //}
+            while (csv.Read())
+            {
+                var record = csv.GetRecord<EnergyData>();
+                this.SearchParms
+
+            }
 
 
             return View();

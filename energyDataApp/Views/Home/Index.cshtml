@@ -65,7 +65,7 @@
                     var csv = new CsvReader(reader);
                     csv.Read();
                     csv.ReadHeader();
-
+                    @*List<> aList = new List<T>;*@
                     while (csv.Read())
                     {
                         var record = csv.GetRecord<EnergyData>();
@@ -79,8 +79,8 @@
                                     <p>@record.NODE</p>
                                     <p>State</p>
                                     <p>@record.State</p>
-                                    <p>ISO</p>
                                     <p>@record.ISO</p>
+                                    <p>ISO</p>
                                 </div>
 
                                 <div id="row2">

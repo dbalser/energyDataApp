@@ -9,4 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\css\site.min.css" />
+  </ItemGroup>
 </Project>
