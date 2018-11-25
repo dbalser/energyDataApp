@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using energyDataApp.Models;
-using System.Diagnostics.Contracts;
 using System.IO;
 using CsvHelper;
-using System.Collections;
 
 namespace energyDataApp.Controllers
 {
@@ -27,7 +21,7 @@ namespace energyDataApp.Controllers
             while (csv.Read())
             {
                 var record = csv.GetRecord<EnergyData>();
-                CurrentSearchParms.AllEnergyData.Add(record);
+                CurrentSearchParms.FillEnergyData(record);
 
             }
 

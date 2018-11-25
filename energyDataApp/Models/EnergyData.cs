@@ -1,8 +1,15 @@
-﻿using System;
+﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace energyDataApp.Models
 {
     public class EnergyData
     {
+        [ScaffoldColumn(false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
+
         public string NODE { get; set; }
         public string ISO { get; set; }
         public string NodeType { get; set; }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace energyDataApp.Models
 {
     public class SearchParms
     {
-
-        public SearchParms() {}
 
         public string FilterCol { get; set; }
         public int MinNum { get; set; }
@@ -15,6 +12,10 @@ namespace energyDataApp.Models
         public string SortMethod { get; set; }
 
         public List<object> AllEnergyData = new List<object>();
+
+        public void FillEnergyData (object data) {
+            this.AllEnergyData.Add(data);
+        }
 
     }
 }
