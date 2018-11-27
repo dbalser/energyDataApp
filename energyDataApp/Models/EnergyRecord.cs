@@ -1,17 +1,13 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace energyDataApp.Models
 {
-    public class EnergyData
+    public partial class EnergyRecord
     {
-        [ScaffoldColumn(false)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
-
-        public string NODE { get; set; }
-        public string ISO { get; set; }
+        public int Id { get; set; }
+        public string Node { get; set; }
+        public string Iso { get; set; }
         public string NodeType { get; set; }
         public string PricingType { get; set; }
         public string State { get; set; }
@@ -22,6 +18,5 @@ namespace energyDataApp.Models
         public string AvgCongestion { get; set; }
         public string MaxCongestion { get; set; }
         public string MinCongestion { get; set; }
-
-   }
+    }
 }

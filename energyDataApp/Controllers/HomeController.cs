@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using energyDataApp.Models;
-using System.IO;
-using CsvHelper;
+using System.Collections.Generic;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace energyDataApp.Controllers
 {
@@ -13,24 +13,19 @@ namespace energyDataApp.Controllers
 
         public IActionResult Index()
         {
-            TextReader reader = new StreamReader("DataTable.csv");
-            var csv = new CsvReader(reader);
-            csv.Read();
-            csv.ReadHeader();
 
-            while (csv.Read())
-            {
-                var record = csv.GetRecord<EnergyData>();
-                CurrentSearchParms.FillEnergyData(record);
-
-            }
-
-            return View(CurrentSearchParms);
+            return View();
         }
 
         public IActionResult Create(string FilterCol, string MaxNum, string MinNum, string SortCol, string SortMethod)
         {
-            return View("Index", CurrentSearchParms);
+            //CurrentSearchParms.FillParamaters(FilterCol, MaxNum, MinNum, SortCol, SortMethod);
+            //CurrentSearchParms.FillEnergyData();
+
+            //CurrentSearchParms.FilterData();
+            //CurrentSearchParms.SortData();
+
+            return Redirect("/Home/Index");
         }
 
 

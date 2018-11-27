@@ -29,9 +29,7 @@ namespace energyDataApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<EnergyDataContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddDbContext<EnergyDataContext>(options => options.UseNpgsql("Host=localhost;Database=EnergyData;Username=londel;Password=;"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().AddControllersAsServices();
@@ -52,6 +50,7 @@ namespace energyDataApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseDefaultFiles();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>
