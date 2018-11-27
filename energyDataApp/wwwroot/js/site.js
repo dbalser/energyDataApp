@@ -1,11 +1,16 @@
 ﻿$(document).ready(() => {
 
-	const FilterColValue = $('select [name=FilterCol]').val()
-	const MaxNumValue = $('input [name=MaxNum]').val()
-	const MinNumValue = $('input [name=MinNum]').val()
-	const SortColValue = $('select [name=SortCol]').val()
-	const SortMethodValue = $('select [name=SortMethod]').val()
+	$(document).on("change","select",function(){
+	  $("option[value=" + this.value + "]", this)
+	  .attr("selected", true).siblings()
+	  .removeAttr("selected")
+	});
 
+	const FilterColValue = $('select[name=FilterCol]').val()
+	const MaxNumValue = $('input[name=MaxNum]').val()
+	const MinNumValue = $('input[name=MinNum]').val()
+	const SortColValue = $('select[name=SortCol]').val()
+	const SortMethodValue = $('select[name=SortMethod]').val()
 
 	const GetAllData = () => {
 
@@ -13,7 +18,7 @@
 			contentType: 'application/json',
 			dataType: 'json',
 			type: 'GET',
-			url: '/api/EnergyData'
+			url: '/api/getall'
 		}
 
 		$.ajax(GetAll).done((data) => {
@@ -22,7 +27,7 @@
   }
 
 	const MakeList = (data) => {
-        console.log(data)
+
 		data.forEach((record) => {
 
 			$("ul").append(
@@ -80,7 +85,7 @@
 			contentType: 'application/json',
 			dataType: 'json',
 			type: 'GET',
-			url: `/api/EnergyData/${col}/${format}`
+			url: `/api/sort/${col}/${format}`
 		}
 
 		$.ajax(Sort).done((data) => {
@@ -95,9 +100,18 @@
   }
 
 	$("#UpdateList").click((e) => {
+
+		const FilterColValue = $('select[name=FilterCol]').val()
+		const MaxNumValue = $('input[name=MaxNum]').val()
+		const MinNumValue = $('input[name=MinNum]').val()
+		const SortColValue = $('select[name=SortCol]').val()
+		const SortMethodValue = $('select[name=SortMethod]').val()
+
 		e.preventDefault()
-		console.log(SortColValue, SortMethodValue);
 		$("li").remove()
+
+		console.log(SortColValue, SortMethodValue);
+
 		if(SortColValue && SortMethodValue) {
 			console.log("getting sorted...");
 			SortList(SortColValue, SortMethodValue)

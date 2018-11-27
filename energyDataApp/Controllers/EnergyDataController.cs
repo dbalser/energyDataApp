@@ -30,11 +30,16 @@ namespace energyDataApp.Controllers
         }
 
 
-        [HttpGet]
-        [Route("/{col}/{format}")]
+        [HttpGet("{col}/{format}")]
         public ActionResult<List<EnergyRecord>> Sort(string col, string format)
         {
-            return _context.EnergyRecord.FromSql("select * from 'EnergyRecord' order by " + col + " " + format).ToList();
+            List<EnergyRecord> list = _context.EnergyRecord.ToList();
+            List<EnergyRecord> SortedList = (System.Collections.Generic.List<energyDataApp.Models.EnergyRecord>)(from data in list
+                                                                                                                 orderby data.AvgPrice
+                                                                                                                 select data);
+
+
+            return SortedList;
         }
     }
 }
