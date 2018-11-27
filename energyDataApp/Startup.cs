@@ -29,7 +29,8 @@ namespace energyDataApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<EnergyDataContext>(options => options.UseNpgsql("Host=localhost;Database=EnergyData;Username=londel;Password=;"));
+            //onnects me to my database
+            services.AddDbContext<EnergyDataContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=EnergyData;Username=londel;Password=;"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().AddControllersAsServices();

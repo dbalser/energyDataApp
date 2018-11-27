@@ -20,8 +20,9 @@
   <ItemGroup>
     <Compile Remove="Migrations\20181124235535_EnergyReadings.cs" />
     <Compile Remove="Models\EmptyClass.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Compile Remove="Models\SearchParms.cs" />
+    <Compile Remove="Migrations\20181125005930_EnergyRecords.Designer.cs" />
+    <Compile Remove="Migrations\20181125005930_EnergyRecords.cs" />
+    <Compile Remove="Migrations\EnergyDataContextModelSnapshot.cs" />
   </ItemGroup>
 </Project>

@@ -9,27 +9,11 @@ namespace energyDataApp.Controllers
     public class HomeController : Controller
     {
 
-        public SearchParms CurrentSearchParms = new SearchParms();
-
         public IActionResult Index()
         {
 
             return View();
         }
-
-        public IActionResult Create(string FilterCol, string MaxNum, string MinNum, string SortCol, string SortMethod)
-        {
-            //CurrentSearchParms.FillParamaters(FilterCol, MaxNum, MinNum, SortCol, SortMethod);
-            //CurrentSearchParms.FillEnergyData();
-
-            //CurrentSearchParms.FilterData();
-            //CurrentSearchParms.SortData();
-
-            return Redirect("/Home/Index");
-        }
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
