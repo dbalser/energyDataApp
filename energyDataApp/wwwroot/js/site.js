@@ -1,8 +1,8 @@
 ﻿$(document).ready(() => {
 
 	const FilterColValue = $('select [name=FilterCol]').val()
-	const MaxNumValue = $('select [name=MaxNum]').val()
-	const MinNumValue = $('select [name=MinNum]').val()
+	const MaxNumValue = $('input [name=MaxNum]').val()
+	const MinNumValue = $('input [name=MinNum]').val()
 	const SortColValue = $('select [name=SortCol]').val()
 	const SortMethodValue = $('select [name=SortMethod]').val()
 
@@ -19,7 +19,7 @@
 		$.ajax(GetAll).done((data) => {
 			MakeList(data)
 		})
-    }
+  }
 
 	const MakeList = (data) => {
         console.log(data)
@@ -74,8 +74,37 @@
 		})
 	}
 
-    if(!FilterColValue, !MaxNumValue, !MinNumValue, !SortColValue, !SortMethodValue) {
+	const SortList = (col, format) => {
 
-        GetAllData()
-    }
+		const Sort = {
+			contentType: 'application/json',
+			dataType: 'json',
+			type: 'GET',
+			url: `/api/EnergyData/${col}/${format}`
+		}
+
+		$.ajax(Sort).done((data) => {
+			console.log("done", data);
+			MakeList(data)
+		})
+	}
+
+  if(!FilterColValue && !MaxNumValue && !MinNumValue && !SortColValue && !SortMethodValue) {
+
+      GetAllData()
+  }
+
+	$("#UpdateList").click((e) => {
+		e.preventDefault()
+		console.log(SortColValue, SortMethodValue);
+		$("li").remove()
+		if(SortColValue && SortMethodValue) {
+			console.log("getting sorted...");
+			SortList(SortColValue, SortMethodValue)
+		}
+
+		if(FilterColValue && MaxNumValue && MinNumValue) {
+
+		}
+	})
 })

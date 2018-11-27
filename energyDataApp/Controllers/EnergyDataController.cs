@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CsvHelper;
 using energyDataApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,5 +29,12 @@ namespace energyDataApp.Controllers
             return _context.EnergyRecord.ToList();
         }
 
+
+        [HttpGet]
+        [Route("/{col}/{format}")]
+        public ActionResult<List<EnergyRecord>> Sort(string col, string format)
+        {
+            return _context.EnergyRecord.FromSql("select * from 'EnergyRecord' order by " + col + " " + format).ToList();
+        }
     }
 }
