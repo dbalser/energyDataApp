@@ -33,9 +33,8 @@ namespace energyDataApp.Controllers
         [HttpGet("{col}/{format}")]
         public ActionResult<List<EnergyRecord>> Sort(string col, string format)
         {
-
-
-            return _context.EnergyRecord.OrderBy((x) => x.AvgPrice).ToList(); 
+           
+            return _context.EnergyRecord.OrderBy((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList(); 
         }
     }
 }
