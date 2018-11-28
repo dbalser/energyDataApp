@@ -41,5 +41,47 @@ namespace energyDataApp.Controllers
                 return _context.EnergyRecord.OrderByDescending((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
             }
         }
+
+        [HttpGet("{col}/{max}/{min}")]
+        public ActionResult<List<EnergyRecord>> Filter(string col, string max, string min)
+        {
+            // I want to find the index of the min and max
+            // then I want to find all the numbers inbetween the and make a list
+
+            List<EnergyRecord> data = _context.EnergyRecord.ToList();
+            int MaxIndex = new int();
+            int MinIndex = new int();
+            decimal minInt = Int32.Parse(min);
+            decimal maxInt = Int32.Parse(max);
+
+            for (var i = 0; i < data.Count; i++) {
+
+                object recordValue = data[i].GetType().GetProperty(col).GetValue(data[i], null);
+                decimal recordInt = Convert.ToInt32(recordValue);
+
+
+                if (min != "0") {
+
+                    decimal difference = Math.Abs(minInt - recordInt);
+
+                    if (difference < 1) {
+                        MinIndex = i;
+                    }
+                }
+
+                if (max != "0")
+                {
+
+                    decimal difference = Math.Abs(maxInt - recordInt);
+
+                    if (difference < 1)
+                    {
+                        MaxIndex = i;
+                    }
+                }
+            }
+
+            return data;
+        }
     }
 }
