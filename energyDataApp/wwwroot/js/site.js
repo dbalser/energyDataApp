@@ -18,7 +18,7 @@
 			contentType: 'application/json',
 			dataType: 'json',
 			type: 'GET',
-			url: '/api/getall'
+			url: '/api/EnergyData'
 		}
 
 		$.ajax(GetAll).done((data) => {
@@ -85,7 +85,7 @@
 			contentType: 'application/json',
 			dataType: 'json',
 			type: 'GET',
-			url: `/api/sort/${col}/${format}`
+			url: `/api/EnergyData/${col}/${format}`
 		}
 
 		$.ajax(Sort).done((data) => {

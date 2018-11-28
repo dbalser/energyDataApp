@@ -33,13 +33,9 @@ namespace energyDataApp.Controllers
         [HttpGet("{col}/{format}")]
         public ActionResult<List<EnergyRecord>> Sort(string col, string format)
         {
-            List<EnergyRecord> list = _context.EnergyRecord.ToList();
-            List<EnergyRecord> SortedList = (System.Collections.Generic.List<energyDataApp.Models.EnergyRecord>)(from data in list
-                                                                                                                 orderby data.AvgPrice
-                                                                                                                 select data);
 
 
-            return SortedList;
+            return _context.EnergyRecord.OrderBy((x) => x.AvgPrice).ToList(); 
         }
     }
 }
