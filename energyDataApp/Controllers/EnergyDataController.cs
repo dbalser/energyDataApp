@@ -49,39 +49,33 @@ namespace energyDataApp.Controllers
             // then I want to find all the numbers inbetween the and make a list
 
             List<EnergyRecord> data = _context.EnergyRecord.ToList();
-            int MaxIndex = new int();
-            int MinIndex = new int();
-            decimal minInt = Int32.Parse(min);
-            decimal maxInt = Int32.Parse(max);
+            List<EnergyRecord> FilteredRecords = new List<EnergyRecord>();
+            double minInt = Int32.Parse(min);
+            double maxInt = Int32.Parse(max);
 
             for (var i = 0; i < data.Count; i++) {
 
                 object recordValue = data[i].GetType().GetProperty(col).GetValue(data[i], null);
-                decimal recordInt = Convert.ToInt32(recordValue);
+                double recordInt = Convert.ToDouble(recordValue);
 
+                if(maxInt == 0) {
 
-                if (min != "0") {
-
-                    decimal difference = Math.Abs(minInt - recordInt);
-
-                    if (difference < 1) {
-                        MinIndex = i;
-                    }
-                }
-
-                if (max != "0")
-                {
-
-                    decimal difference = Math.Abs(maxInt - recordInt);
-
-                    if (difference < 1)
+                    if (minInt < recordInt)
                     {
-                        MaxIndex = i;
+                        FilteredRecords.Add(data[i]);
                     }
                 }
+                else if (minInt < recordInt) {
+
+                    if (maxInt > recordInt)
+                    {
+                        FilteredRecords.Add(data[i]);
+                    }
+                }
+
             }
 
-            return data;
+            return FilteredRecords;
         }
     }
 }
