@@ -97,7 +97,6 @@
 
 		max = max ? max : "0"
 		min = min ? min : "0"
-		console.log(min, max, "hahahah");
 		const Filter = {
 			contentType: 'application/json',
 			dataType: 'json',
@@ -110,13 +109,29 @@
 		})
 	}
 
+	const SortAndFilter = (filcol, max, min, sortcol, format) => {
+
+		max = max ? max : "0"
+		min = min ? min : "0"
+		const SortFilter = {
+			contentType: 'application/json',
+			dataType: 'json',
+			type: 'GET',
+			url: `/api/EnergyData/${filcol}/${max}/${min}/${sortcol}/${format}`
+		}
+
+		$.ajax(SortFilter).done((data) => {
+			MakeList(data)
+		})
+	}
+
   if(!FilterColValue && !MaxNumValue && !MinNumValue && !SortColValue && !SortMethodValue) {
 
       GetAllData()
   }
 
 	$("#UpdateList").click((e) => {
-	
+
 		const FilterColValue = $('select[name=FilterCol]').val()
 		const MaxNumValue = $('input[name=MaxNum]').val()
 		const MinNumValue = $('input[name=MinNum]').val()
@@ -126,13 +141,17 @@
 		e.preventDefault()
 		$("li").remove()
 
-		console.log(FilterColValue, "col", MaxNumValue, "max", MinNumValue, 'min');
+		if(FilterColValue && SortColValue && SortMethodValue) {
+			console.log("hit");
+			SortAndFilter(FilterColValue, MaxNumValue, MinNumValue, SortColValue, SortMethodValue)
+		}
 
-		if(SortColValue && SortMethodValue) {
+		else if(SortColValue && SortMethodValue) {
+			console.log("sorting...");
 			SortList(SortColValue, SortMethodValue)
 		}
 
-		if(FilterColValue) {
+		else if(FilterColValue) {
 			console.log("getting filted...");
 			FilterList(FilterColValue, MaxNumValue, MinNumValue)
 		}
