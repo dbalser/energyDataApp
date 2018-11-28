@@ -1,17 +1,5 @@
 ﻿$(document).ready(() => {
 
-	$(document).on("change","select",function(){
-	  $("option[value=" + this.value + "]", this)
-	  .attr("selected", true).siblings()
-	  .removeAttr("selected")
-	});
-
-	const FilterColValue = $('select[name=FilterCol]').val()
-	const MaxNumValue = $('input[name=MaxNum]').val()
-	const MinNumValue = $('input[name=MinNum]').val()
-	const SortColValue = $('select[name=SortCol]').val()
-	const SortMethodValue = $('select[name=SortMethod]').val()
-
 	const GetAllData = () => {
 
 		const GetAll = {
@@ -26,7 +14,7 @@
 		})
   }
 
-	const MakeList = (data) => {
+	const MakeList = (data, filcol, sortcol) => {
 
 		data.forEach((record) => {
 
@@ -36,46 +24,62 @@
 					"<div id='BasicInfo'>" +
 
 							"<div id='row1'>" +
+
 									"<p>Node</p>" +
-									`<p>${record.node ? record.node : "No data found"}</p>` +
+									`<p class="Node">${record.node ? record.node : "No data found"}</p>` +
+
 									"<p>State</p>" +
-									`<p>${record.state ? record.state : "No data found"}</p>` +
+									`<p class="State">${record.state ? record.state : "No data found"}</p>` +
+
 									"<p>ISO</p>" +
-                  `<p>${record.iso ? record.iso : "No data found"}</p>` +
+                  `<p class="Iso">${record.iso ? record.iso : "No data found"}</p>` +
               "</div>" +
 
 							"<div id='row2'>" +
+
 									"<p>Node Type</p>" +
-									`<p>${record.nodeType ? record.nodeType : "No data found"}</p>` +
+									`<p class="NodeType">${record.nodeType ? record.nodeType : "No data found"}</p>` +
+
 									"<p>County</p>" +
-									`<p>${record.county ? record.county : "No data found"}</p>` +
+									`<p class="County">${record.county ? record.county : "No data found"}</p>` +
+
 									"<p>Pricing Type</p>" +
-									`<p>${record.pricingType ? record.pricingType : "No data found"}</p>` +
+									`<p class="PricingType">${record.pricingType ? record.pricingType : "No data found"}</p>` +
 							"</div>" +
 					"</div>" +
 
 					"<div id='NumericalInfo'>" +
 
 							"<div id='row1'>" +
+
 									"<p>Avg Price</p>" +
-									`<p>${record.avgPrice ? record.avgPrice : "No data found"}</p>` +
+									`<p class="AvgPrice">${record.avgPrice ? record.avgPrice : "No data found"}</p>` +
+
 									"<p>Max Pric</p>" +
-									`<p>${record.maxPrice ? record.maxPrice : "No data found"}</p>` +
+									`<p class="MaxPrice">${record.maxPrice ? record.maxPrice : "No data found"}</p>` +
+
 									"<p>Min Price</p>" +
-									`<p>${record.minPrice ? record.minPrice : "No data found"}</p>` +
+									`<p class="MinPrice">${record.minPrice ? record.minPrice : "No data found"}</p>` +
 							"</div>" +
 
 							"<div id='row2'>" +
+
 									"<p>Avg Congestion</p>" +
-									`<p>${record.avgCongestion ? record.avgCongestion : "No data found"}</p>` +
+									`<p class="AvgCongestion">${record.avgCongestion ? record.avgCongestion : "No data found"}</p>` +
+
 									"<p>Max congestion</p>" +
-									`<p>${record.maxCongestion ? record.maxCongestion : "No data found"}</p>` +
+									`<p class="MaxCongestion">${record.maxCongestion ? record.maxCongestion : "No data found"}</p>` +
+
 									"<p>Min Congestion</p>" +
-									`<p>${record.minCongestion ? record.minCongestion : "No data found"}</p>` +
+									`<p class="MinCongestion">${record.minCongestion ? record.minCongestion : "No data found"}</p>` +
 							"</div>" +
 					"</div>" +
 			"</li>"
 		)
+
+		filcol ? $(`.${filcol}`).css("background", "red") : null
+		sortcol ? $(`.${sortcol}`).css("background", "red") : null
+
 		})
 	}
 
@@ -89,7 +93,7 @@
 		}
 
 		$.ajax(Sort).done((data) => {
-			MakeList(data)
+			MakeList(data, "", col)
 		})
 	}
 
@@ -105,7 +109,7 @@
 		}
 
 		$.ajax(Filter).done((data) => {
-			MakeList(data)
+			MakeList(data, col, "")
 		})
 	}
 
@@ -121,14 +125,12 @@
 		}
 
 		$.ajax(SortFilter).done((data) => {
-			MakeList(data)
+			MakeList(data, filcol, sortcol)
 		})
 	}
 
-  if(!FilterColValue && !MaxNumValue && !MinNumValue && !SortColValue && !SortMethodValue) {
 
-      GetAllData()
-  }
+  GetAllData()
 
 	$("#UpdateList").click((e) => {
 
@@ -142,17 +144,14 @@
 		$("li").remove()
 
 		if(FilterColValue && SortColValue && SortMethodValue) {
-			console.log("hit");
 			SortAndFilter(FilterColValue, MaxNumValue, MinNumValue, SortColValue, SortMethodValue)
 		}
 
 		else if(SortColValue && SortMethodValue) {
-			console.log("sorting...");
 			SortList(SortColValue, SortMethodValue)
 		}
 
 		else if(FilterColValue) {
-			console.log("getting filted...");
 			FilterList(FilterColValue, MaxNumValue, MinNumValue)
 		}
 	})
