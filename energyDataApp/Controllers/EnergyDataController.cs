@@ -33,8 +33,13 @@ namespace energyDataApp.Controllers
         [HttpGet("{col}/{format}")]
         public ActionResult<List<EnergyRecord>> Sort(string col, string format)
         {
-           
-            return _context.EnergyRecord.OrderBy((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList(); 
+            if (format == "asc")
+            {
+                return _context.EnergyRecord.OrderBy((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
+            }
+            else {
+                return _context.EnergyRecord.OrderByDescending((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
+            }
         }
     }
 }
