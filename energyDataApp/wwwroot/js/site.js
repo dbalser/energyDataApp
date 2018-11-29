@@ -66,10 +66,10 @@
 									`<p class="AvgPrice">${record.avgPrice ? record.avgPrice : "No data found"}</p>` +
 
 									"<p>Max Pric</p>" +
-									`<p class="MaxPrice">${record.MaxPrice ? record.MaxPrice : "No data found"}</p>` +
+									`<p class="MaxPrice">${record.maxPrice ? record.maxPrice : "No data found"}</p>` +
 
 									"<p>Min Price</p>" +
-									`<p class="MinPrice">${record.MinPrice ? record.MinPrice : "No data found"}</p>` +
+									`<p class="MinPrice">${record.minPrice ? record.minPrice : "No data found"}</p>` +
 							"</div>" +
 
 							"<div id='row2'>" +
@@ -78,10 +78,10 @@
 									`<p class="AvgCongestion">${record.avgCongestion ? record.avgCongestion : "No data found"}</p>` +
 
 									"<p>Max congestion</p>" +
-									`<p class="MaxCongestion">${record.MaxCongestion ? record.MaxCongestion : "No data found"}</p>` +
+									`<p class="MaxCongestion">${record.maxCongestion ? record.maxCongestion : "No data found"}</p>` +
 
 									"<p>Min Congestion</p>" +
-									`<p class="MinCongestion">${record.MinCongestion ? record.MinCongestion : "No data found"}</p>` +
+									`<p class="MinCongestion">${record.minCongestion ? record.minCongestion : "No data found"}</p>` +
 							"</div>" +
 					"</div>" +
 				"</li>"
