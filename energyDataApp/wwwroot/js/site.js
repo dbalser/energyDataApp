@@ -1,10 +1,11 @@
 ﻿$(document).ready(() => {
 
 	$(".ErrorMsg").css("display", "none")
+	
+	// Data from MakeList is stored here to be used again in MakeList
+	let CurrentFilCol, CurrentSortCol, CurrentIndex, DataList = []
 
 	const MakeList = (Data, FilCol, SortCol, PrevIndex) => {
-
-		console.log(PrevIndex, Data.length);
 
 		if(Data.length === 0) {
 			$("#NoDataError").css("display", "inline-block")
@@ -85,12 +86,17 @@
 		FilCol ? $(`.${FilCol}`).css("background", "red") : null
 		SortCol ? $(`.${SortCol}`).css("background", "red") : null
 
+		// This data needs stored so when we scroll to the bottom we can send it all recursivly
+		CurrentIndex = PrevIndex
+		CurrentFilCol = FilCol
+		CurrentSortCol = SortCol
+		DataList = Data
+
+		// This Checks if we have scrolled near the bottom, if so we spawn the next 10 items in our data
 		$(window).scroll(function() {
-		   if($(window).scrollTop() + $(window).height() == $(document).height()) {
-				 // This checks to see if someone has scrolled all the way down
-				 // and will make the next 10 list items.
-					PrevIndex += 10
-			 		MakeList(Data, FilCol, SortCol, PrevIndex)
+		   if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
+		       CurrentIndex += 10
+					 MakeList(DataList, CurrentFilCol, CurrentSortCol, CurrentIndex)
 		   }
 		});
 	}
