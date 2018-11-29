@@ -57,16 +57,26 @@ namespace energyDataApp.Controllers
         }
 
         public List<EnergyRecord> Sort(string col, string format)
-        {
+        {   
+            // This handles the numeric string cols 
+            if(col == "AvgPrice" || col == "MaxPrice" || col == "MinPrice" || col == "AvgCongestion" || col == "MaxCogestion" || col == "MinCongestion" ) {
 
+                if (format == "asc")
+                {
+                    return _context.EnergyRecord.OrderBy((x) => Convert.ToDouble(x.GetType().GetProperty(col).GetValue(x, null))).ToList();
+                }
+
+                return _context.EnergyRecord.OrderByDescending((x) => Convert.ToDouble(x.GetType().GetProperty(col).GetValue(x, null))).ToList();
+            }
+
+            // This handles string cols
             if (format == "asc")
             {
                 return _context.EnergyRecord.OrderBy((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
             }
-            else
-            {
-                return _context.EnergyRecord.OrderByDescending((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
-            }
+
+            return _context.EnergyRecord.OrderByDescending((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
+
         }
 
         [HttpGet]

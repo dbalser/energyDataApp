@@ -15,6 +15,7 @@
 	const MakeList = (Data, FilCol, SortCol, PrevIndex) => {
 
 		if(Data.length === 0) {
+			console.log(Data.length);
 			$("#NoDataError").css("display", "inline-block")
 			return
 		}
@@ -98,14 +99,14 @@
 		CurrentFilCol = FilCol
 		CurrentSortCol = SortCol
 		DataList = Data
-
+		console.log(DataList, CurrentFilCol, CurrentSortCol, CurrentIndex, "uhhh");
 		// This Checks if we have scrolled near the bottom, if so we spawn the next 10 items in our data
 		$(window).scroll(function() {
 		   if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
 		       CurrentIndex += 10
 					 MakeList(DataList, CurrentFilCol, CurrentSortCol, CurrentIndex)
 		   }
-		});
+		})
 	}
 
 	const GetAllData = () => {
@@ -201,7 +202,7 @@
 		//Error Handling
 		let ErrorHit = false
 		// If we have a num and no col or just a col and no nums, throw error
-		if((!Max && !Min) || !FilCol) {
+		if((!Max && !Min) || (Max && !Min && !FilCol) || (!Max && Min && !FilCol) || !FilCol) {
 			$("#FilterError").css("display", "inline-block")
 			ErrorHit = true
 		}
