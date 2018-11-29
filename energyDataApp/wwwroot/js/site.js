@@ -134,7 +134,7 @@
 	const SortList = (Col, Method) => {
 
 		//Error Handling
-		if(!Method ) {
+		if(!Method || !Col) {
 			$("#SortError").css("display", "inline-block")
 			return
 		}
