@@ -2,30 +2,25 @@
 
 	$(".ErrorMsg").css("display", "none")
 
-	const GetAllData = () => {
+	const MakeList = (Data, FilCol, SortCol, PrevIndex) => {
 
-		const GetAll = {
-			contentType: 'application/json',
-			dataType: 'json',
-			type: 'GET',
-			url: '/api/EnergyData'
-		}
+		console.log(PrevIndex, Data.length);
 
-		$.ajax(GetAll).done((data) => {
-			MakeList(data)
-		})
-  }
-
-	const MakeList = (data, filcol, sortcol) => {
-
-		if(data.length === 0) {
+		if(Data.length === 0) {
 			$("#NoDataError").css("display", "inline-block")
 			return
 		}
 
 		$(".ErrorMsg").css("display", "none")
-		
-		data.forEach((record) => {
+
+		for (var i = PrevIndex; i < 10 + PrevIndex; i++) {
+
+			const record = Data[i]
+
+			if(!record) {
+			//This pretects against PrevIndex being too high
+				return
+			}
 
 			$("ul").append(
 				"<li>" +
@@ -65,10 +60,10 @@
 									`<p class="AvgPrice">${record.avgPrice ? record.avgPrice : "No data found"}</p>` +
 
 									"<p>Max Pric</p>" +
-									`<p class="MaxPrice">${record.maxPrice ? record.maxPrice : "No data found"}</p>` +
+									`<p class="MaxPrice">${record.MaxPrice ? record.MaxPrice : "No data found"}</p>` +
 
 									"<p>Min Price</p>" +
-									`<p class="MinPrice">${record.minPrice ? record.minPrice : "No data found"}</p>` +
+									`<p class="MinPrice">${record.MinPrice ? record.MinPrice : "No data found"}</p>` +
 							"</div>" +
 
 							"<div id='row2'>" +
@@ -77,77 +72,103 @@
 									`<p class="AvgCongestion">${record.avgCongestion ? record.avgCongestion : "No data found"}</p>` +
 
 									"<p>Max congestion</p>" +
-									`<p class="MaxCongestion">${record.maxCongestion ? record.maxCongestion : "No data found"}</p>` +
+									`<p class="MaxCongestion">${record.MaxCongestion ? record.MaxCongestion : "No data found"}</p>` +
 
 									"<p>Min Congestion</p>" +
-									`<p class="MinCongestion">${record.minCongestion ? record.minCongestion : "No data found"}</p>` +
+									`<p class="MinCongestion">${record.MinCongestion ? record.MinCongestion : "No data found"}</p>` +
 							"</div>" +
 					"</div>" +
-			"</li>"
-		)
+				"</li>"
+			)
+		}
 
-		filcol ? $(`.${filcol}`).css("background", "red") : null
-		sortcol ? $(`.${sortcol}`).css("background", "red") : null
+		FilCol ? $(`.${FilCol}`).css("background", "red") : null
+		SortCol ? $(`.${SortCol}`).css("background", "red") : null
 
-		})
+		$(window).scroll(function() {
+		   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+				 // This checks to see if someone has scrolled all the way down
+				 // and will make the next 10 list items.
+					PrevIndex += 10
+			 		MakeList(Data, FilCol, SortCol, PrevIndex)
+		   }
+		});
 	}
 
-	const SortList = (col, format) => {
+	const GetAllData = () => {
+
+		const GetAll = {
+			contentType: 'application/json',
+			dataType: 'json',
+			type: 'GET',
+			url: '/api/EnergyData'
+		}
+
+		$.ajax(GetAll).done((Data) => {
+			MakeList(Data, "", "", 0)
+		})
+  }
+
+	const SortList = (Col, Format) => {
 
 		const Sort = {
 			contentType: 'application/json',
 			dataType: 'json',
 			type: 'GET',
-			url: `/api/EnergyData/${col}/${format}`
+			url: `/api/EnergyData/${Col}/${Format}`
 		}
 
-		$.ajax(Sort).done((data) => {
+		$.ajax(Sort).done((Data) => {
 			$("li").remove()
-			MakeList(data, "", col)
+			MakeList(Data, "", Col, 0)
 		})
 	}
 
-	const FilterList = (col, max, min) => {
+	const FilterList = (Col, Max, Min) => {
 
-		if(!max && !min) {
+		if(!Max && !Min) {
 			$("#FilterError").css("display", "inline-block")
 			return
 		}
+		if(Number(Max) < Number(Min)) {
+			$("#DifferenceError").css("display", "inline-block")
+			return
+		}
 
-		max = max ? max : "0"
-		min = min ? min : "0"
+		Max = Max ? Max : "0"
+		Min = Min ? Min : "0"
 		const Filter = {
 			contentType: 'application/json',
 			dataType: 'json',
 			type: 'GET',
-			url: `/api/EnergyData/${col}/${max}/${min}`
+			url: `/api/EnergyData/${Col}/${Max}/${Min}`
 		}
 
-		$.ajax(Filter).done((data) => {
+		$.ajax(Filter).done((Data) => {
 			$("li").remove()
-			MakeList(data, col, "")
+			MakeList(Data, Col, "", 0)
 		})
 	}
 
-	const SortAndFilter = (filcol, max, min, sortcol, format) => {
+	const SortAndFilter = (FilCol, Max, Min, SortCol, Format) => {
 
-		if(!max && !min) {
+		if(!Max && !Min) {
 			$("#FilterError").css("display", "inline-block")
 			return
 		}
 
-		max = max ? max : "0"
-		min = min ? min : "0"
+		Max = Max ? Max : "0"
+		Min = Min ? Min : "0"
 		const SortFilter = {
 			contentType: 'application/json',
 			dataType: 'json',
 			type: 'GET',
-			url: `/api/EnergyData/${filcol}/${max}/${min}/${sortcol}/${format}`
+			url: `/api/EnergyData/${FilCol}/${Max}/${Min}/${SortCol}/${Format}`
 		}
 
-		$.ajax(SortFilter).done((data) => {
+		$.ajax(SortFilter).done((Data) => {
 			$("li").remove()
-			MakeList(data, filcol, sortcol)
+			MakeList(Data, FilCol, SortCol, 0)
 		})
 	}
 

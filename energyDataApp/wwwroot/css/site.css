@@ -44,6 +44,9 @@ input[type=submit] {
     margin-bottom: 5%;
 }
 
+#EnergyReadings {
+    border:solid red;
+}
 #EnergyReadings p{
     font-size: 18px;
 }
