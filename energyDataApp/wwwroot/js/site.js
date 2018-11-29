@@ -1,7 +1,7 @@
 ﻿$(document).ready(() => {
 
 	$(".ErrorMsg").css("display", "none")
-	
+
 	// Data from MakeList is stored here to be used again in MakeList
 	let CurrentFilCol, CurrentSortCol, CurrentIndex, DataList = []
 
@@ -117,6 +117,11 @@
 
 	const SortList = (Col, Format) => {
 
+		if(!Format) {
+			$("#SortError").css("display", "inline-block")
+			return
+		}
+		
 		const Sort = {
 			contentType: 'application/json',
 			dataType: 'json',
@@ -191,11 +196,11 @@
 
 		e.preventDefault()
 
-		if(FilterColValue && SortColValue && SortMethodValue) {
+		if(FilterColValue && SortColValue) {
 			SortAndFilter(FilterColValue, MaxNumValue, MinNumValue, SortColValue, SortMethodValue)
 		}
 
-		else if(SortColValue && SortMethodValue) {
+		else if(SortColValue) {
 			SortList(SortColValue, SortMethodValue)
 		}
 
