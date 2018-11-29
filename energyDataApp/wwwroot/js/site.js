@@ -1,5 +1,7 @@
 ﻿$(document).ready(() => {
 
+	$(".ErrorMsg").css("display", "none")
+
 	const GetAllData = () => {
 
 		const GetAll = {
@@ -16,6 +18,13 @@
 
 	const MakeList = (data, filcol, sortcol) => {
 
+		if(data.length === 0) {
+			$("#NoDataError").css("display", "inline-block")
+			return
+		}
+
+		$(".ErrorMsg").css("display", "none")
+		
 		data.forEach((record) => {
 
 			$("ul").append(
@@ -93,11 +102,17 @@
 		}
 
 		$.ajax(Sort).done((data) => {
+			$("li").remove()
 			MakeList(data, "", col)
 		})
 	}
 
 	const FilterList = (col, max, min) => {
+
+		if(!max && !min) {
+			$("#FilterError").css("display", "inline-block")
+			return
+		}
 
 		max = max ? max : "0"
 		min = min ? min : "0"
@@ -109,11 +124,17 @@
 		}
 
 		$.ajax(Filter).done((data) => {
+			$("li").remove()
 			MakeList(data, col, "")
 		})
 	}
 
 	const SortAndFilter = (filcol, max, min, sortcol, format) => {
+
+		if(!max && !min) {
+			$("#FilterError").css("display", "inline-block")
+			return
+		}
 
 		max = max ? max : "0"
 		min = min ? min : "0"
@@ -125,6 +146,7 @@
 		}
 
 		$.ajax(SortFilter).done((data) => {
+			$("li").remove()
 			MakeList(data, filcol, sortcol)
 		})
 	}
@@ -141,7 +163,6 @@
 		const SortMethodValue = $('select[name=SortMethod]').val()
 
 		e.preventDefault()
-		$("li").remove()
 
 		if(FilterColValue && SortColValue && SortMethodValue) {
 			SortAndFilter(FilterColValue, MaxNumValue, MinNumValue, SortColValue, SortMethodValue)

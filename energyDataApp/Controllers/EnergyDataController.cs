@@ -38,7 +38,7 @@ namespace energyDataApp.Controllers
                 if (maxInt == 0)
                 {
 
-                    if (minInt < recordInt)
+                    if (minInt <= recordInt)
                     {
                         FilteredRecords.Add(data[i]);
                     }
@@ -46,7 +46,7 @@ namespace energyDataApp.Controllers
                 else if (minInt < recordInt)
                 {
 
-                    if (maxInt > recordInt)
+                    if (maxInt >= recordInt)
                     {
                         FilteredRecords.Add(data[i]);
                     }
@@ -85,7 +85,6 @@ namespace energyDataApp.Controllers
         [HttpGet("{col}/{max}/{min}")]
         public ActionResult<List<EnergyRecord>> FilterAction(string col, string max, string min)
         {
-
             return Filter(_context.EnergyRecord.ToList(), col, max, min);
         }
 
