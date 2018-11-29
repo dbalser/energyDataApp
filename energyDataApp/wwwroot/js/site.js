@@ -199,27 +199,25 @@
 	const SortAndFilter = (FilCol, Max, Min, SortCol, Method) => {
 
 		//Error Handling
-		if((FilCol || Max|| Min) && (SortCol|| Method) && !(FilCol, (Max || Min), SortCol, Method)) {
-
+		let ErrorHit = false
+		// If we have a num and no col or just a col and no nums, throw error
+		if((!Max && !Min) || !FilCol) {
 			$("#FilterError").css("display", "inline-block")
-			$("#SortError").css("display", "inline-block")
-			return
+			ErrorHit = true
 		}
-
-		if(!Max && !Min || !FilCol) {
-			$("#FilterError").css("display", "inline-block")
-			return
-		}
-
+		// If we have a Max and Max is small the Min, Throw error
 		if( Max && Number(Max) < Number(Min)) {
 			$("#DifferenceError").css("display", "inline-block")
-			return
+			ErrorHit = true
 		}
 
+		//If were Missing
 		if(!Method || !SortCol) {
 			$("#SortError").css("display", "inline-block")
-			return
+			ErrorHit = true
 		}
+
+		if(ErrorHit) { return }
 
 		Max = Max ? Max : "0"
 		Min = Min ? Min : "0"
@@ -280,15 +278,15 @@
 				GetAllData()
 				return
 			}
-
+			// If a param from both sides gets filled out but not all
 			if((FilterColValue || MaxNumValue || MinNumValue) && (SortColValue || SortMethodValue)) {
 				SortAndFilter(FilterColValue, MaxNumValue, MinNumValue, SortColValue, SortMethodValue)
 			}
-
+			// If one or more sort params is filled
 			else if(SortColValue || SortMethodValue) {
 				SortList(SortColValue, SortMethodValue)
 			}
-
+			// If one or more sort params is filled
 			else if(FilterColValue || MaxNumValue || MinNumValue) {
 				FilterList(FilterColValue, MaxNumValue, MinNumValue)
 			}
