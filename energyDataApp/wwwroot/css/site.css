@@ -1,65 +1,69 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\
 for details on configuring this project to bundle and minify static web assets. */
 
-/*#9FBFBE #50A4A7 #177275 #E9EEF2 #0F122C
-greyblue, lightblue, blue, white, black*/
+/* all colors */
+/*#E6EFC2 #98D3A6 #37AFA8 #496E7D #212020*/
 
 * {
     margin: 0 auto;
     padding: 0;
-    background: #E9EEF2;
+    background: #292727;
     list-style: none;
+		border: none;
+		font-size: 15px;
+		letter-spacing: .8px;
 }
 
 #FilterContainor, #SortContainor {
     width: 35%;
-    background: #50A4A7;
+    background: #496E7D;
     border-radius: 25px;
     display: inline-block;
-    margin: 5% 7%;
+    margin: 5% 6%;
+		padding: 1%;
 }
 
 #FilterContainor *, #SortContainor * {
-    display: block;
-    margin: 3% 35%;
+    margin: 2% 30%;
     background: #E9EEF2;
     border:none;
 }
 
 #FilterContainor select {
-    margin-left: 36%;
+    margin-left: 32%;
 }
 
 #SortContainor select:first-child {
-    margin-left: 38%;
+    margin-left: 34%;
 }
 
 input[type=submit] {
-    background: #50A4A7;
+    background: #496E7D;
     width: 15%;
     height: 50px;
     font-size: 20px;
+		border: none;
     border-radius: 25px;
     margin-left: 42.5%;
     margin-bottom: 5%;
 }
 
-#EnergyReadings {
-    border:solid red;
+input[type=submit]:focus {
+	outline: none;
 }
+
 #EnergyReadings p{
     font-size: 18px;
 }
 #EnergyReadings div {
     display: inline-block;
-    background: #177275;
     width: 46%;
     margin-left: 3%;
 }
 #EnergyReadings li {
     width: 95%;
-    background: #177275;
     border-radius: 10px;
+    border:solid 1.5px #496E7D;
     margin-bottom: 2%;
 }
 
@@ -68,13 +72,11 @@ input[type=submit] {
     width: 42%;
     display: inline-block;
     margin-left: 5%;
-    background: #177275;
 }
 
 
 #BasicInfo p:nth-child(odd), #NumericalInfo p:nth-child(odd) {
     margin: 2.5% 0%;
-    background: #177275;
     color: #E9EEF2;
 }
 
@@ -82,13 +84,33 @@ input[type=submit] {
     padding: 2.5% 10%;
     margin-bottom: 5%;
     background: #E9EEF2;
+		color: #171011;
     border-radius: 25px;
 }
 
 .ErrorMsg {
-	background: #177275;
-  font-size: 10px;
+	width: 50%;
+	background: #496E7D !important;
+	color: red;
+  font-size: 18px;
+	letter-spacing: 2px;
 	display: none;
+}
+
+#FilterError {
+	margin: 3% 32% !important;
+}
+#DifferenceError {
+	margin: 3% 28% !important;
+}
+#SortError {
+	margin: 3% 33% !important;
+}
+#NoDataError {
+	margin: 3% 40% !important;
+	font-size: 30px !important;
+	background: #E9EEF2 !important;
+
 }
 
 

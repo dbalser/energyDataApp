@@ -1,6 +1,5 @@
 ﻿$(document).ready(() => {
 
-	$(".ErrorMsg").css("display", "none")
 
 	// Data from MakeList is stored here to be used again in MakeList
 	let CurrentFilCol, CurrentSortCol, CurrentIndex, DataList = []
@@ -83,8 +82,8 @@
 			)
 		}
 
-		FilCol ? $(`.${FilCol}`).css("background", "red") : null
-		SortCol ? $(`.${SortCol}`).css("background", "red") : null
+		FilCol ? $(`.${FilCol}`).css("background", "#496E7D") : null
+		SortCol ? $(`.${SortCol}`).css("background", "#496E7D") : null
 
 		// This data needs stored so when we scroll to the bottom we can send it all recursivly
 		CurrentIndex = PrevIndex
@@ -121,7 +120,7 @@
 			$("#SortError").css("display", "inline-block")
 			return
 		}
-		
+
 		const Sort = {
 			contentType: 'application/json',
 			dataType: 'json',
@@ -182,7 +181,6 @@
 			MakeList(Data, FilCol, SortCol, 0)
 		})
 	}
-
 
   GetAllData()
 
