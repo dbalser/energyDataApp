@@ -4,14 +4,20 @@
 	// Data from MakeList is stored here to be used again in MakeList
 	let CurrentFilCol, CurrentSortCol, CurrentIndex, DataList = []
 
+	let ResetData = () => {
+
+		CurrentIndex = 0
+		CurrentFilCol = ""
+		CurrentSortCol = ""
+		DataList = []
+	}
+
 	const MakeList = (Data, FilCol, SortCol, PrevIndex) => {
 
 		if(Data.length === 0) {
 			$("#NoDataError").css("display", "inline-block")
 			return
 		}
-
-		$(".ErrorMsg").css("display", "none")
 
 		for (var i = PrevIndex; i < 10 + PrevIndex; i++) {
 
@@ -85,6 +91,8 @@
 		FilCol ? $(`.${FilCol}`).css("background", "#496E7D") : null
 		SortCol ? $(`.${SortCol}`).css("background", "#496E7D") : null
 
+		$(".ErrorMsg").css("display", "none")
+
 		// This data needs stored so when we scroll to the bottom we can send it all recursivly
 		CurrentIndex = PrevIndex
 		CurrentFilCol = FilCol
@@ -102,6 +110,8 @@
 
 	const GetAllData = () => {
 
+		ResetData()
+
 		const GetAll = {
 			contentType: 'application/json',
 			dataType: 'json',
@@ -109,14 +119,22 @@
 			url: '/api/EnergyData'
 		}
 
-		$.ajax(GetAll).done((Data) => {
+		$.ajax(GetAll)
+		.done((Data) => {
+			$("li").remove()
 			MakeList(Data, "", "", 0)
+		})
+		.fail(() => {
+			$("li").remove()
+			ResetData()
+			MakeList([], "", "", 0)
 		})
   }
 
-	const SortList = (Col, Format) => {
+	const SortList = (Col, Method) => {
 
-		if(!Format) {
+		//Error Handling
+		if(!Method ) {
 			$("#SortError").css("display", "inline-block")
 			return
 		}
@@ -125,28 +143,40 @@
 			contentType: 'application/json',
 			dataType: 'json',
 			type: 'GET',
-			url: `/api/EnergyData/${Col}/${Format}`
+			url: `/api/EnergyData/${Col}/${Method}`
 		}
 
-		$.ajax(Sort).done((Data) => {
+		$.ajax(Sort)
+		.done((Data) => {
 			$("li").remove()
 			MakeList(Data, "", Col, 0)
+		})
+		.fail(() => {
+			$("li").remove()
+			ResetData()
+			MakeList([], "", "", 0)
 		})
 	}
 
 	const FilterList = (Col, Max, Min) => {
 
+		//Error Handling
+		if(!Col) {
+			$("#FilterError").css("display", "inline-block")
+			return
+		}
 		if(!Max && !Min) {
 			$("#FilterError").css("display", "inline-block")
 			return
 		}
-		if(Number(Max) < Number(Min)) {
+		if( Max && Number(Max) < Number(Min)) {
 			$("#DifferenceError").css("display", "inline-block")
 			return
 		}
 
 		Max = Max ? Max : "0"
 		Min = Min ? Min : "0"
+
 		const Filter = {
 			contentType: 'application/json',
 			dataType: 'json',
@@ -154,16 +184,40 @@
 			url: `/api/EnergyData/${Col}/${Max}/${Min}`
 		}
 
-		$.ajax(Filter).done((Data) => {
+		$.ajax(Filter)
+		.done((Data) => {
 			$("li").remove()
 			MakeList(Data, Col, "", 0)
 		})
+		.fail(() => {
+			$("li").remove()
+			ResetData()
+			MakeList([], "", "", 0)
+		})
 	}
 
-	const SortAndFilter = (FilCol, Max, Min, SortCol, Format) => {
+	const SortAndFilter = (FilCol, Max, Min, SortCol, Method) => {
 
-		if(!Max && !Min) {
+		//Error Handling
+		if((FilCol || Max|| Min) && (SortCol|| Method) && !(FilCol, (Max || Min), SortCol, Method)) {
+
 			$("#FilterError").css("display", "inline-block")
+			$("#SortError").css("display", "inline-block")
+			return
+		}
+
+		if(!Max && !Min || !FilCol) {
+			$("#FilterError").css("display", "inline-block")
+			return
+		}
+
+		if( Max && Number(Max) < Number(Min)) {
+			$("#DifferenceError").css("display", "inline-block")
+			return
+		}
+
+		if(!Method || !SortCol) {
+			$("#SortError").css("display", "inline-block")
 			return
 		}
 
@@ -173,37 +227,79 @@
 			contentType: 'application/json',
 			dataType: 'json',
 			type: 'GET',
-			url: `/api/EnergyData/${FilCol}/${Max}/${Min}/${SortCol}/${Format}`
+			url: `/api/EnergyData/${FilCol}/${Max}/${Min}/${SortCol}/${Method}`
 		}
 
-		$.ajax(SortFilter).done((Data) => {
+		$.ajax(SortFilter)
+		.done((Data) => {
 			$("li").remove()
 			MakeList(Data, FilCol, SortCol, 0)
 		})
+		.fail(() => {
+			$("li").remove()
+			ResetData()
+			MakeList([], "", "", 0)
+		})
 	}
 
+	const SubmitBtn_TextHandler = () => {
+
+		$(".Params").change(() => {
+
+			const FilterColValue = $('select[name=FilterCol]').val()
+			const MaxNumValue = $('input[name=MaxNum]').val()
+			const MinNumValue = $('input[name=MinNum]').val()
+			const SortColValue = $('select[name=SortCol]').val()
+			const SortMethodValue = $('select[name=SortMethod]').val()
+
+			if(!FilterColValue && !MaxNumValue && !MinNumValue && !SortColValue && !SortMethodValue) {
+				$("#UpdateList").val("Get All")
+				return
+			}
+
+			$("#UpdateList").val("Update list")
+		})
+	}
+
+	const SubmitBtn_ClickHandler = () => {
+
+		$("#UpdateList").click((e) => {
+
+			$(".ErrorMsg").css("display", "none")
+
+			e.preventDefault()
+
+			const FilterColValue = $('select[name=FilterCol]').val()
+			const MaxNumValue = $('input[name=MaxNum]').val()
+			const MinNumValue = $('input[name=MinNum]').val()
+			const SortColValue = $('select[name=SortCol]').val()
+			const SortMethodValue = $('select[name=SortMethod]').val()
+
+			// When no params Get All
+			if(!FilterColValue && !MaxNumValue && !MinNumValue && !SortColValue && !SortMethodValue) {
+				GetAllData()
+				return
+			}
+
+			if((FilterColValue || MaxNumValue || MinNumValue) && (SortColValue || SortMethodValue)) {
+				SortAndFilter(FilterColValue, MaxNumValue, MinNumValue, SortColValue, SortMethodValue)
+			}
+
+			else if(SortColValue || SortMethodValue) {
+				SortList(SortColValue, SortMethodValue)
+			}
+
+			else if(FilterColValue || MaxNumValue || MinNumValue) {
+				FilterList(FilterColValue, MaxNumValue, MinNumValue)
+			}
+		})
+	}
+
+	// On load Get All
   GetAllData()
 
-	$("#UpdateList").click((e) => {
+	SubmitBtn_TextHandler()
 
-		const FilterColValue = $('select[name=FilterCol]').val()
-		const MaxNumValue = $('input[name=MaxNum]').val()
-		const MinNumValue = $('input[name=MinNum]').val()
-		const SortColValue = $('select[name=SortCol]').val()
-		const SortMethodValue = $('select[name=SortMethod]').val()
+	SubmitBtn_ClickHandler()
 
-		e.preventDefault()
-
-		if(FilterColValue && SortColValue) {
-			SortAndFilter(FilterColValue, MaxNumValue, MinNumValue, SortColValue, SortMethodValue)
-		}
-
-		else if(SortColValue) {
-			SortList(SortColValue, SortMethodValue)
-		}
-
-		else if(FilterColValue) {
-			FilterList(FilterColValue, MaxNumValue, MinNumValue)
-		}
-	})
 })

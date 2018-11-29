@@ -3,7 +3,7 @@
 
         <div id="FilterContainor">
 
-            <select name="FilterCol">
+            <select class = "Params" name="FilterCol">
                 <option value="">Select a Column</option>
 
                 <option value="AvgPrice">Avg Price</option>
@@ -14,9 +14,9 @@
                 <option value="MinCongestion">Min Congestion</option>
             </select>
 
-            <input name="MaxNum" type="number" placeholder="max" />
+            <input class = "Params" name="MaxNum" type="number" placeholder="max" />
 
-            <input name="MinNum" type="number" placeholder="min" />
+            <input class = "Params" name="MinNum" type="number" placeholder="min" />
 
 						<p class = "ErrorMsg" id = "FilterError">more info needed</p>
 						<p class = "ErrorMsg" id = "DifferenceError">min is larger than max</p>
@@ -24,7 +24,7 @@
 
         <div id="SortContainor">
 
-            <select name="SortCol">
+            <select class = "Params" name="SortCol">
                 <option value="" selected>Select a Column</option>
 
                 <option value="Node">Node</option>
@@ -41,7 +41,7 @@
                 <option value="MinCongestion">Min Congestion</option>
             </select>
 
-            <select name="SortMethod">
+            <select class = "Params" name="SortMethod">
                 <option value="">Select Sorting Pattern</option>
 
                 <option value="asc">ABC / 123</option>
@@ -51,7 +51,7 @@
 						<p class = "ErrorMsg" id = "SortError">more info needed</p>
         </div>
 
-        <input id="UpdateList" type="submit" value="Update List" />
+        <input id="UpdateList" type="submit" value="Welcome!" />
 
     <div id="EnergyReadings">
 
