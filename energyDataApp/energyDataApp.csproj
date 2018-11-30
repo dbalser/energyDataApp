@@ -24,5 +24,6 @@
     <Compile Remove="Migrations\20181125005930_EnergyRecords.cs" />
     <Compile Remove="Migrations\EnergyDataContextModelSnapshot.cs" />
     <Compile Remove="Models\EmptyClass.cs" />
+    <Compile Remove="Controllers\EnergyDataContext.cs" />
   </ItemGroup>
 </Project>
