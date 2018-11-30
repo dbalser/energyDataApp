@@ -1,8 +1,11 @@
 ﻿
 <div name="Index">
 
+			<div id = "ParamsContainor">
+
         <div id="FilterContainor">
 
+						<p> Filter List </p>
             <select class = "Params" name="FilterCol">
                 <option value="">Select a Column</option>
 
@@ -24,6 +27,8 @@
 
         <div id="SortContainor">
 
+						<p> Sort List </p>
+
             <select class = "Params" name="SortCol">
                 <option value="" selected>Select a Column</option>
 
@@ -41,8 +46,7 @@
                 <option value="Mincongestion">Min Congestion</option>
             </select>
 
-            <select class = "Params"
-						 name="SortMethod">
+            <select class = "Params" name="SortMethod">
                 <option value="">Select Sorting Pattern</option>
 
                 <option value="asc">ABC / 123</option>
@@ -51,6 +55,7 @@
 
 						<p class = "ErrorMsg" id = "SortError">more info needed</p>
         </div>
+			</div>
 
         <input id="UpdateList" type="submit" value="Welcome!" />
 

@@ -14,27 +14,66 @@ for details on configuring this project to bundle and minify static web assets. 
 		letter-spacing: .8px;
 }
 
+#ParamsContainor {
+	width: 90%;
+	margin: 5% 5%;
+  border:solid 1.5px #496E7D;
+  border-radius: 25px;
+	-webkit-box-shadow: inset 1px -3px 93px 17px rgba(33,32,32,1);
+	-moz-box-shadow: inset 1px -3px 93px 17px rgba(33,32,32,1);
+	box-shadow: inset 1px -3px 93px 17px rgba(33,32,32,1);
+}
+
+#FilterContainor p:first-child, #SortContainor p:first-child {
+		background-color:rgba(0, 0, 0, 0);
+    width: 55%;
+		text-align: center;
+		margin: 3% 22.5%;
+		color: #E9EEF2;
+		font-size: 50px;
+}
+
 #FilterContainor, #SortContainor {
+		background-color:rgba(0, 0, 0, 0);
     width: 35%;
-    background: #496E7D;
-    border-radius: 25px;
     display: inline-block;
-    margin: 5% 6%;
+    margin: 5% 5%;
 		padding: 1%;
 }
 
-#FilterContainor *, #SortContainor * {
-    margin: 2% 30%;
+#FilterContainor input {
     background: #E9EEF2;
+		width:40%;
+    margin: 2% 28.5%;
     border:none;
+		padding:2%;
 }
 
 #FilterContainor select {
-    margin-left: 32%;
+    background: #E9EEF2;
+		width: 40%;
+    margin:2% 30%;
+    border:none;
+		-webkit-appearance: menulist-button;
+   	height: 50px;
 }
 
-#SortContainor select:first-child {
-    margin-left: 34%;
+#SortContainor select:nth-child(2) {
+    background: #E9EEF2;
+		width: 40%;
+    margin: 2.5% 30%;
+    border:none;
+		-webkit-appearance: menulist-button;
+   	height: 50px;
+}
+
+#SortContainor select:nth-child(3) {
+    background: #E9EEF2;
+		width:50%;
+    margin: 2.5% 25%;
+    border:none;
+		-webkit-appearance: menulist-button;
+   	height: 50px;
 }
 
 input[type=submit] {
@@ -45,7 +84,7 @@ input[type=submit] {
 		border: none;
     border-radius: 25px;
     margin-left: 42.5%;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 
 input[type=submit]:focus {
@@ -54,24 +93,33 @@ input[type=submit]:focus {
 
 #EnergyReadings p{
     font-size: 18px;
+		background-color:rgba(0, 0, 0, 0);
 }
 #EnergyReadings div {
     display: inline-block;
     width: 46%;
     margin-left: 3%;
+		background-color:rgba(0, 0, 0, 0);
 }
 #EnergyReadings li {
     width: 95%;
     border-radius: 10px;
     border:solid 1.5px #496E7D;
     margin-bottom: 2%;
+		-webkit-box-shadow: inset 1px -3px 93px 17px rgba(33,32,32,1);
+		-moz-box-shadow: inset 1px -3px 93px 17px rgba(33,32,32,1);
+		box-shadow: inset 1px -3px 93px 17px rgba(33,32,32,1);
 }
 
+#BasicInfo {
+		background-color:rgba(0, 0, 0, 0);
+}
 
 #BasicInfo #row1, #BasicInfo #row2, #NumericalInfo #row1, #NumericalInfo #row2 {
     width: 42%;
     display: inline-block;
     margin-left: 5%;
+		background-color:rgba(0, 0, 0, 0);
 }
 
 
@@ -89,8 +137,9 @@ input[type=submit]:focus {
 }
 
 .ErrorMsg {
-	width: 50%;
-	background: #496E7D !important;
+	width: 35%;
+	background-color:rgba(0, 0, 0, 0);
+	text-align: center;
 	color: red;
   font-size: 18px;
 	letter-spacing: 2px;
@@ -98,19 +147,81 @@ input[type=submit]:focus {
 }
 
 #FilterError {
-	margin: 3% 32% !important;
+	margin: 3% 32.5%;
 }
 #DifferenceError {
-	margin: 3% 28% !important;
+	margin: 3% 32.5%;
 }
 #SortError {
-	margin: 3% 33% !important;
+	margin: 3% 32.5%;
 }
 #NoDataError {
-	margin: 3% 40% !important;
-	font-size: 30px !important;
-	background: #212020 !important;
+	margin: 0% 32.5%;
+	padding-bottom: 10%;
+	font-size: 30px;
+	background-color:rgba(0, 0, 0, 0);
+}
 
+@media screen and (min-width: 1700px) {
+
+	#FilterContainor p:first-child, #SortContainor p:first-child {
+			background-color:rgba(0, 0, 0, 0);
+	    width: 35%;
+			text-align: center;
+			margin: 3% 32.5%;
+			color: #E9EEF2;
+			font-size: 50px;
+	}
+
+	#FilterContainor, #SortContainor {
+			background-color:rgba(0, 0, 0, 0);
+	    width: 35%;
+	    display: inline-block;
+	    margin: 5% 5%;
+			padding: 1%;
+	}
+
+	#FilterContainor input {
+	    background: #E9EEF2;
+			width:30%;
+	    margin: 2% 34%;
+	    border:none;
+			padding:2%;
+	}
+
+	#FilterContainor select {
+	    background: #E9EEF2;
+			width: 30%;
+	    margin:2% 35%;
+	    border:none;
+			-webkit-appearance: menulist-button;
+	   	height: 50px;
+	}
+
+	#SortContainor select:nth-child(2) {
+	    background: #E9EEF2;
+			width: 30%;
+	    margin: 2.5% 35%;
+	    border:none;
+			-webkit-appearance: menulist-button;
+	   	height: 50px;
+	}
+
+	#SortContainor select:nth-child(3) {
+	    background: #E9EEF2;
+			width:40%;
+	    margin: 2.5% 30%;
+	    border:none;
+			-webkit-appearance: menulist-button;
+	   	height: 50px;
+	}
+
+
+	#NoDataError {
+		margin: 2% 32.5%;
+		font-size: 50px !important;
+		background-color:rgba(0, 0, 0, 0);
+	}
 }
 
 
