@@ -30,7 +30,7 @@ namespace energyDataApp
             }); 
 
             //onnects me to my database
-            services.AddDbContext<EnergyDataContext>(options => options.UseNpgsql("Host=energydatadb.cbdhcmfwzqc6.us-west-2.rds.amazonaws.com; Port=5432; Database=EnergyDataDB; Username=londel;Password=halotwo4;"));
+            services.AddDbContext<EnergyDataDBContext>(options => options.UseNpgsql("Host=energydatadb.cbdhcmfwzqc6.us-west-2.rds.amazonaws.com; Port=5432; Database=EnergyDataDB; Username=londel;Password=halotwo4"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().AddControllersAsServices();

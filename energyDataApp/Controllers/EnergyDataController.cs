@@ -16,16 +16,16 @@ namespace energyDataApp.Controllers
     [ApiController]
     public class EnergyDataController : ControllerBase
     {
-        private readonly EnergyDataContext _context;
+        private readonly EnergyDataDBContext _context;
 
-        public EnergyDataController(EnergyDataContext context)
+        public EnergyDataController(EnergyDataDBContext context)
         {
             _context = context;
         }
 
-        public List<EnergyRecord> Filter(List<EnergyRecord> data, string col, string max, string min)
+        public List<Energyrecords> Filter(List<Energyrecords> data, string col, string max, string min)
         {
-            List<EnergyRecord> FilteredRecords = new List<EnergyRecord>();
+            List<Energyrecords> FilteredRecords = new List<Energyrecords>();
             double minInt = Int32.Parse(min);
             double maxInt = Int32.Parse(max);
 
@@ -56,52 +56,52 @@ namespace energyDataApp.Controllers
             return FilteredRecords;
         }
 
-        public List<EnergyRecord> Sort(string col, string format)
+        public List<Energyrecords> Sort(string col, string format)
         {   
             // This handles the numeric string cols 
             if(col == "AvgPrice" || col == "MaxPrice" || col == "MinPrice" || col == "AvgCongestion" || col == "MaxCogestion" || col == "MinCongestion" ) {
 
                 if (format == "asc")
                 {
-                    return _context.EnergyRecord.OrderBy((x) => Convert.ToDouble(x.GetType().GetProperty(col).GetValue(x, null))).ToList();
+                    return _context.Energyrecords.OrderBy((x) => Convert.ToDouble(x.GetType().GetProperty(col).GetValue(x, null))).ToList();
                 }
 
-                return _context.EnergyRecord.OrderByDescending((x) => Convert.ToDouble(x.GetType().GetProperty(col).GetValue(x, null))).ToList();
+                return _context.Energyrecords.OrderByDescending((x) => Convert.ToDouble(x.GetType().GetProperty(col).GetValue(x, null))).ToList();
             }
 
             // This handles string cols
             if (format == "asc")
             {
-                return _context.EnergyRecord.OrderBy((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
+                return _context.Energyrecords.OrderBy((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
             }
 
-            return _context.EnergyRecord.OrderByDescending((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
+            return _context.Energyrecords.OrderByDescending((x) => x.GetType().GetProperty(col).GetValue(x, null)).ToList();
 
         }
 
         [HttpGet]
-        public ActionResult<List<EnergyRecord>> GetAll()
+        public ActionResult<List<Energyrecords>> GetAll()
         {
-            return _context.EnergyRecord.ToList();
+            return _context.Energyrecords.ToList();
         }
 
 
         [HttpGet("{col}/{format}")]
-        public ActionResult<List<EnergyRecord>> SortAction(string col, string format)
+        public ActionResult<List<Energyrecords>> SortAction(string col, string format)
         {
             return Sort(col, format);
         }
 
         [HttpGet("{col}/{max}/{min}")]
-        public ActionResult<List<EnergyRecord>> FilterAction(string col, string max, string min)
+        public ActionResult<List<Energyrecords>> FilterAction(string col, string max, string min)
         {
-            return Filter(_context.EnergyRecord.ToList(), col, max, min);
+            return Filter(_context.Energyrecords.ToList(), col, max, min);
         }
 
         [HttpGet("{filcol}/{max}/{min}/{sortcol}/{format}")]
-        public ActionResult<List<EnergyRecord>> SortAndFilterAction(string filcol, string max, string min, string sortcol, string format)
+        public ActionResult<List<Energyrecords>> SortAndFilterAction(string filcol, string max, string min, string sortcol, string format)
         {
-            List<EnergyRecord> data = Sort(sortcol, format);
+            List<Energyrecords> data = Sort(sortcol, format);
             return Filter(data, filcol, max, min);
         }
 

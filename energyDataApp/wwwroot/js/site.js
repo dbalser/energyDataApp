@@ -49,13 +49,13 @@
 							"<div id='row2'>" +
 
 									"<p>Node Type</p>" +
-									`<p class="NodeType">${record.nodeType ? record.nodeType : "No data found"}</p>` +
+									`<p class="NodeType">${record.nodetype ? record.nodetype : "No data found"}</p>` +
 
 									"<p>County</p>" +
 									`<p class="County">${record.county ? record.county : "No data found"}</p>` +
 
 									"<p>Pricing Type</p>" +
-									`<p class="PricingType">${record.pricingType ? record.pricingType : "No data found"}</p>` +
+									`<p class="PricingType">${record.pricingtype ? record.pricingtype : "No data found"}</p>` +
 							"</div>" +
 					"</div>" +
 
@@ -64,25 +64,25 @@
 							"<div id='row1'>" +
 
 									"<p>Avg Price</p>" +
-									`<p class="AvgPrice">${record.avgPrice ? record.avgPrice : "No data found"}</p>` +
+									`<p class="AvgPrice">${record.avgprice ? record.avgprice : "No data found"}</p>` +
 
 									"<p>Max Pric</p>" +
-									`<p class="MaxPrice">${record.maxPrice ? record.maxPrice : "No data found"}</p>` +
+									`<p class="MaxPrice">${record.maxprice ? record.maxprice : "No data found"}</p>` +
 
 									"<p>Min Price</p>" +
-									`<p class="MinPrice">${record.minPrice ? record.minPrice : "No data found"}</p>` +
+									`<p class="MinPrice">${record.minprice ? record.minprice : "No data found"}</p>` +
 							"</div>" +
 
 							"<div id='row2'>" +
 
 									"<p>Avg Congestion</p>" +
-									`<p class="AvgCongestion">${record.avgCongestion ? record.avgCongestion : "No data found"}</p>` +
+									`<p class="AvgCongestion">${record.avgcongestion ? record.avgcongestion : "No data found"}</p>` +
 
 									"<p>Max congestion</p>" +
-									`<p class="MaxCongestion">${record.maxCongestion ? record.maxCongestion : "No data found"}</p>` +
+									`<p class="MaxCongestion">${record.maxcongestion ? record.maxcongestion : "No data found"}</p>` +
 
 									"<p>Min Congestion</p>" +
-									`<p class="MinCongestion">${record.minCongestion ? record.minCongestion : "No data found"}</p>` +
+									`<p class="MinCongestion">${record.mincongestion ? record.mincongestion : "No data found"}</p>` +
 							"</div>" +
 					"</div>" +
 				"</li>"

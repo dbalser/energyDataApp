@@ -22,7 +22,7 @@ namespace energyDataApp.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=ergydatadb.cbdhcmfwzqc6.us-west-2.rds.amazonaws.com;Port=5432;Database=EnergyDataDB;Username=londel;Password=halotwo4;");
+                optionsBuilder.UseNpgsql("Host=energydatadb.cbdhcmfwzqc6.us-west-2.rds.amazonaws.com;Port=5432;Database=energydatadb;Username=londel;Password=halotwo4;");
             }
         }
 
