@@ -27,10 +27,10 @@ namespace energyDataApp
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
-            }); Host = en
+            }); 
 
             //onnects me to my database
-            services.AddDbContext<EnergyDataContext>(options => options.UseNpgsql("ergydatadb.cbdhcmfwzqc6.us-west-2.rds.amazonaws.com;Port=5432;Database=EnergyDataDB;Username=londel;Password=halotwo4;"));
+            services.AddDbContext<EnergyDataContext>(options => options.UseNpgsql("Host=energydatadb.cbdhcmfwzqc6.us-west-2.rds.amazonaws.com; Port=5432; Database=EnergyDataDB; Username=londel;Password=halotwo4;"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().AddControllersAsServices();
