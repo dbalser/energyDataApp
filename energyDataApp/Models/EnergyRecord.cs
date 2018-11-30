@@ -5,7 +5,7 @@ namespace energyDataApp.Models
 {
     public partial class EnergyRecord
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Node { get; set; }
         public string Iso { get; set; }
         public string NodeType { get; set; }

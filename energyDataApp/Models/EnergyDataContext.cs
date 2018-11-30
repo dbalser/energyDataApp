@@ -22,8 +22,7 @@ namespace energyDataApp.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("Host=localhost;Database=EnergyData;Username=londel;Password=;");
+                optionsBuilder.UseNpgsql("ergydatadb.cbdhcmfwzqc6.us-west-2.rds.amazonaws.com;Port=5432;Database=EnergyDataDB;Username=londel;Password=halotwo4;");
             }
         }
 
@@ -31,7 +30,7 @@ namespace energyDataApp.Models
         {
             modelBuilder.Entity<EnergyRecord>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
+                //entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Iso).HasColumnName("ISO");
 
