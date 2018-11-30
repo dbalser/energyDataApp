@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
-    <PackageReference Include="CsvHelper" Version="9.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.0" />
     <PackageReference Include="NpgSql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.1" />
@@ -26,5 +24,6 @@
     <Compile Remove="Migrations\EnergyDataContextModelSnapshot.cs" />
     <Compile Remove="Models\EmptyClass.cs" />
     <Compile Remove="Controllers\EnergyDataContext.cs" />
+    <Compile Remove="Models\GetRDSConnectionString.cs" />
   </ItemGroup>
 </Project>

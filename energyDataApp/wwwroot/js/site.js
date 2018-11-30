@@ -114,6 +114,17 @@
 		$.ajax(GetAll)
 		.done((Data) => {
 			$("li").remove()
+
+			if(Data.length > 0) {
+				// This Checks if we have scrolled near the bottom, if so we spawn the next 10 items in our data
+				$(window).scroll(function() {
+				   if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
+				       CurrentIndex += 10
+							 MakeList(DataList, CurrentFilCol, CurrentSortCol, CurrentIndex)
+				   }
+				})
+			}
+			
 			MakeList(Data, "", "", 0)
 		})
 		.fail(() => {
