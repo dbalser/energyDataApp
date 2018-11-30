@@ -19,6 +19,25 @@
 			return
 		}
 
+		FilCol ? $(`.${FilCol}`).css("background", "#496E7D") : null
+		SortCol ? $(`.${SortCol}`).css("background", "#496E7D") : null
+
+		$(".ErrorMsg").css("display", "none")
+
+		// This data needs stored so when we scroll to the bottom we can send it all recursivly
+		CurrentIndex = PrevIndex
+		CurrentFilCol = FilCol
+		CurrentSortCol = SortCol
+		DataList = Data
+
+		// This Checks if we have scrolled near the bottom, if so we spawn the next 10 items in our data
+		$(window).scroll(function() {
+		   if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
+		       CurrentIndex += 10
+					 MakeList(DataList, CurrentFilCol, CurrentSortCol, CurrentIndex)
+		   }
+		})
+
 		for (var i = PrevIndex; i < 10 + PrevIndex; i++) {
 
 			const record = Data[i]
@@ -87,25 +106,6 @@
 				"</li>"
 			)
 		}
-
-		FilCol ? $(`.${FilCol}`).css("background", "#496E7D") : null
-		SortCol ? $(`.${SortCol}`).css("background", "#496E7D") : null
-
-		$(".ErrorMsg").css("display", "none")
-
-		// This data needs stored so when we scroll to the bottom we can send it all recursivly
-		CurrentIndex = PrevIndex
-		CurrentFilCol = FilCol
-		CurrentSortCol = SortCol
-		DataList = Data
-
-		// This Checks if we have scrolled near the bottom, if so we spawn the next 10 items in our data
-		$(window).scroll(function() {
-		   if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
-		       CurrentIndex += 10
-					 MakeList(DataList, CurrentFilCol, CurrentSortCol, CurrentIndex)
-		   }
-		})
 	}
 
 	const GetAllData = () => {
