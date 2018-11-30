@@ -57,9 +57,10 @@ namespace energyDataApp.Controllers
         }
 
         public List<Energyrecords> Sort(string col, string format)
-        {   
+        {
+
             // This handles the numeric string cols 
-            if(col == "AvgPrice" || col == "MaxPrice" || col == "MinPrice" || col == "AvgCongestion" || col == "MaxCogestion" || col == "MinCongestion" ) {
+            if (col == "Avgprice" || col == "Maxprice" || col == "Minprice" || col == "Avgcongestion" || col == "Maxcongestion" || col == "Mincongestion" ) {
 
                 if (format == "asc")
                 {
@@ -67,6 +68,7 @@ namespace energyDataApp.Controllers
                 }
 
                 return _context.Energyrecords.OrderByDescending((x) => Convert.ToDouble(x.GetType().GetProperty(col).GetValue(x, null))).ToList();
+
             }
 
             // This handles string cols

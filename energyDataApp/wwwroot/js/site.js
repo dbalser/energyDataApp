@@ -15,7 +15,6 @@
 	const MakeList = (Data, FilCol, SortCol, PrevIndex) => {
 
 		if(Data.length === 0) {
-			console.log(Data.length);
 			$("#NoDataError").css("display", "inline-block")
 			return
 		}
@@ -49,13 +48,13 @@
 							"<div id='row2'>" +
 
 									"<p>Node Type</p>" +
-									`<p class="NodeType">${record.nodetype ? record.nodetype : "No data found"}</p>` +
+									`<p class="Nodetype">${record.nodetype ? record.nodetype : "No data found"}</p>` +
 
 									"<p>County</p>" +
 									`<p class="County">${record.county ? record.county : "No data found"}</p>` +
 
 									"<p>Pricing Type</p>" +
-									`<p class="PricingType">${record.pricingtype ? record.pricingtype : "No data found"}</p>` +
+									`<p class="Pricingtype">${record.pricingtype ? record.pricingtype : "No data found"}</p>` +
 							"</div>" +
 					"</div>" +
 
@@ -64,25 +63,25 @@
 							"<div id='row1'>" +
 
 									"<p>Avg Price</p>" +
-									`<p class="AvgPrice">${record.avgprice ? record.avgprice : "No data found"}</p>` +
+									`<p class="Avgprice">${record.avgprice ? record.avgprice : "No data found"}</p>` +
 
 									"<p>Max Pric</p>" +
-									`<p class="MaxPrice">${record.maxprice ? record.maxprice : "No data found"}</p>` +
+									`<p class="Maxprice">${record.maxprice ? record.maxprice : "No data found"}</p>` +
 
 									"<p>Min Price</p>" +
-									`<p class="MinPrice">${record.minprice ? record.minprice : "No data found"}</p>` +
+									`<p class="Minprice">${record.minprice ? record.minprice : "No data found"}</p>` +
 							"</div>" +
 
 							"<div id='row2'>" +
 
 									"<p>Avg Congestion</p>" +
-									`<p class="AvgCongestion">${record.avgcongestion ? record.avgcongestion : "No data found"}</p>` +
+									`<p class="Avgcongestion">${record.avgcongestion ? record.avgcongestion : "No data found"}</p>` +
 
 									"<p>Max congestion</p>" +
-									`<p class="MaxCongestion">${record.maxcongestion ? record.maxcongestion : "No data found"}</p>` +
+									`<p class="Maxcongestion">${record.maxcongestion ? record.maxcongestion : "No data found"}</p>` +
 
 									"<p>Min Congestion</p>" +
-									`<p class="MinCongestion">${record.mincongestion ? record.mincongestion : "No data found"}</p>` +
+									`<p class="Mincongestion">${record.mincongestion ? record.mincongestion : "No data found"}</p>` +
 							"</div>" +
 					"</div>" +
 				"</li>"
@@ -99,7 +98,7 @@
 		CurrentFilCol = FilCol
 		CurrentSortCol = SortCol
 		DataList = Data
-		console.log(DataList, CurrentFilCol, CurrentSortCol, CurrentIndex, "uhhh");
+
 		// This Checks if we have scrolled near the bottom, if so we spawn the next 10 items in our data
 		$(window).scroll(function() {
 		   if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
